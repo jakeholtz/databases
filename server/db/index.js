@@ -12,13 +12,13 @@ var connection = mysql.createConnection({
   database: 'chat'
 });
 
-// connection.connect((err) => {
-//  if (err) {
-//    console.log('error connecting to database');
-//  } else {
-//    console.log('connected to database...');
-//  }
-// });
+connection.connect((err) => {
+ if (err) {
+   console.log('error connecting to database');
+ } else {
+   console.log('connected to database...');
+ }
+});
 
 
 // var queryMessages = connection.query('SELECT * from messages', function(err, results, fields) {

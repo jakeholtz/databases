@@ -43,8 +43,6 @@ module.exports = {
           console.log('Success posting messages to DB!');
           console.log('Results: ' + JSON.stringify(results));
 
-          // res.header(headers);
-          // res.status(200);
           res.send(results);
         } else {
           console.log('error posting messages: ' + err);

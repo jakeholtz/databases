@@ -46,7 +46,7 @@ var app = {
     $.ajax({
       url: app.server + '/messages',
       type: 'GET',
-      // data: { order: '-createdAt' },
+      data: { order: '-createdAt' },
       contentType: 'application/json',
       success: function(data) {
         if (!data.results || !data.results.length) { return; }

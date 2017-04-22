@@ -104,4 +104,68 @@ describe('Persistent Node Chat Server', function() {
       });
     });
   });
+
+    it('Should check that new messages get added', function(done) {
+
+    var queryString = 'SELECT * FROM messages';
+
+    request({
+      method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'John',
+        message: 'Men like you can never change!',
+        roomname: 'main'
+      }
+    });
+
+    request({
+      method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Jake',
+        message: 'Can I have 7 McChicken McNuggets?',
+        roomname: 'Nowhere'
+      }
+    });
+
+
+
+    dbConnection.query(queryString, function(err) {
+      if (err) { throw err; }
+
+      request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+        var messageLog = JSON.parse(body);
+        expect(messageLog.length).to.equal(2);
+        done();
+      });
+    });
+  });
+
+  it('Should check that username, message, and roomname are all valid fields', function(done) {
+
+    var queryString = 'SELECT * FROM messages';
+
+    request({
+      method: 'POST',
+      uri: 'http://127.0.0.1:3000/classes/messages',
+      json: {
+        username: 'Scallywag Snickerfritz',
+        message: 'Scarglebog Dingledok ak Snipperswaggle',
+        roomname: 'Marklar Scallywonk'
+      }
+    });
+
+    dbConnection.query(queryString, function(err) {
+      if (err) { throw err; }
+
+      request('http://127.0.0.1:3000/classes/messages', function(error, response, body) {
+        var messageLog = JSON.parse(body);
+        expect(messageLog[0].msg).to.equal('Scarglebog Dingledok ak Snipperswaggle');
+        expect(messageLog[0].room_id).to.equal('Marklar Scallywonk');
+        done();
+      });
+    });
+  });
+
 });

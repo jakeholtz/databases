@@ -20,6 +20,7 @@ module.exports = {
       console.log('get for messages');
       models.messages.get(res);
       
+      res.status(200);
     }, 
     post: function (req, res) {
       console.log('post for messages');
@@ -29,8 +30,8 @@ module.exports = {
 
       models.messages.post(msg, room, res);
 
-
-      // res.send(msg);
+      
+      res.status(200);
     } 
   },
 
@@ -39,16 +40,18 @@ module.exports = {
       console.log('get for users');
       models.users.get(res);
 
-
-
+      
+      res.status(200);
     },
     post: function (req, res) {
       var msg = req.body.message;
       var user = req.body.username;
       var room = req.body.roomname;
 
-      console.log('post for users with: ' + user);
       models.users.post(user, res);
+      
+      
+      res.status(200);
     }
   },
 
