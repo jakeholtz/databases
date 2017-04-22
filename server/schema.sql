@@ -18,13 +18,12 @@ CREATE TABLE users (
 
 CREATE TABLE messages (
   id MEDIUMINT NOT NULL AUTO_INCREMENT,
-  msg VARCHAR(255), 
-  room_id MEDIUMINT,
-  created MEDIUMINT, 
-  user_id MEDIUMINT,
-  PRIMARY KEY(id),
-  FOREIGN KEY(room_id) REFERENCES rooms(id),
-  FOREIGN KEY(user_id) REFERENCES users(id) 
+  msg VARCHAR(255),
+  -- user_id MEDIUMINT,
+  -- room_id MEDIUMINT,
+  PRIMARY KEY(id)
+  -- FOREIGN KEY(room_id) REFERENCES rooms(id),
+  -- FOREIGN KEY(user_id) REFERENCES users(id) 
 );
 
 

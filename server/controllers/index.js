@@ -1,5 +1,6 @@
 var models = require('../models');
-var Promise = require('bluebird');
+// var Promise = require('bluebird');
+var parser = require('body-parser');
 
 //added promise thing for whatever
 // var Promise = require('bluebird');
@@ -16,37 +17,50 @@ var headers = {
 module.exports = {
   messages: {
     get: function (req, res) {
-    // a function which handles a get request for all messages
-    models.messages.get().then()
-    res.header(headers);
-    res.status(200)
-    res.send('content from get: ' + JSON.stringify(req.body));
+      console.log('get for messages');
+      models.messages.get();
+      
 
+      res.header(headers);
+      res.status(200)
     }, 
     post: function (req, res) {
-    // a function which handles posting a message to the database
+      console.log('post for messages');
+      models.messages.post();
 
 
+      var msg = req.body.message;
+      var user = req.body.username;
+      var room = req.body.roomname;
+      res.send(msg);
     } 
   },
 
   users: {
-    // Ditto as above
     get: function (req, res) {
-	// a function which handles a get request for all users
+      console.log('get for users');
+      models.users.get();
+
 
 
     },
     post: function (req, res) {
-   	// a function which handles a post request for all users
+      console.log('post for users');
+      models.users.post();
 
 
+      var msg = req.body.message;
+      var user = req.body.username;
+      var room = req.body.roomname;
+      res.send(user);
     }
   },
 
   options: {
   	option: function(req, res) {
-  		console.log('!!!!!!!!!!!!!!!!!!!!!!!!');
+      console.log('options from controller');
+
+
   		res.header(headers);
   		res.send(200, null);
   	}

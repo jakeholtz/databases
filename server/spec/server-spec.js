@@ -17,10 +17,12 @@ describe('Persistent Node Chat Server', function() {
     dbConnection.connect();
 
        var tablename = "messages"; // TODO: fill this out
+       var userTable = "users";
 
     /* Empty the db table before each test so that multiple tests
      * (or repeated runs of the tests) won't screw each other up: */
-    dbConnection.query('truncate ' + tablename, done);
+    dbConnection.query('truncate ' + tablename);
+    dbConnection.query('truncate ' + userTable, done);
   });
 
   afterEach(function() {
@@ -34,6 +36,7 @@ describe('Persistent Node Chat Server', function() {
       uri: 'http://127.0.0.1:3000/classes/users',
       json: { username: 'Valjean' }
     }, function () {
+      console.log('post user request....');
       // Post a message to the node chat server:
       request({
         method: 'POST',
@@ -44,6 +47,7 @@ describe('Persistent Node Chat Server', function() {
           roomname: 'Hello'
         }
       }, function () {
+        console.log('post message request....');
         // Now if we look in the database, we should find the
         // posted message there.
 
@@ -57,7 +61,9 @@ describe('Persistent Node Chat Server', function() {
           expect(results.length).to.equal(1);
 
           // TODO: If you don't have a column named text, change this test.
-          expect(results[0].text).to.equal('In mercy\'s name, three days is all I need.');
+          console.log('resultsFROMTEST: ' + results);
+
+          expect(results[0].msg).to.equal('In mercy\'s name, three days is all I need.');
 
           done();
         });

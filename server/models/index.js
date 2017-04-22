@@ -4,30 +4,29 @@ var db = require('../db');
 module.exports = {
   messages: {
     get: function () {
-      console.log('model');
-    	console.log('getting messages from database');
-    	db.retrieveMessages();
+    	console.log('GET MESSAGES request sending from models to DB');
+      // console.log(db.connection);
+    	console.log(db.retrieveMessages());
 
-    }, // a function which produces all the messages
+    }, 
     post: function () {
-      console.log('model');
-    	console.log('posting messages to database');
-    	db.insertMessages();
+      console.log('POST MESSAGES request sending from models to DB');
+      // console.log(db.connection);
+    	console.log(db.insertMessages());
 
-    } // a function which can be used to insert a message into the database
+    }
   },
 
   users: {
-    // Ditto as above.
     get: function () {
-      console.log('model');
-    	console.log('getting users from database');
-    	db.retrieveUsers();
+      console.log('GET USERS request sending from models to DB');
+      // console.log(db.connection);
+    	console.log(db.retrieveUsers());
     },
     post: function () {
-      console.log('model');
-    	console.log('adding(post) users from database');
-    	db.insertUsers();
+      console.log('POST USERS request sending from models to DB');
+      // console.log(db.connection);
+    	console.log(db.insertUsers());
     }
   }
 };
