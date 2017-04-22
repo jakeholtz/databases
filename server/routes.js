@@ -10,6 +10,7 @@ router.get('/users', controller.users.get);
 
 router.post('/users', controller.users.post);
 
+router.options('/messages', controller.options.option);
 
 module.exports = router;
 
