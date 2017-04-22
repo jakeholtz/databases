@@ -22,16 +22,17 @@ module.exports = {
       
 
       res.header(headers);
-      res.status(200)
+      res.status(200);
     }, 
     post: function (req, res) {
       console.log('post for messages');
-      models.messages.post();
-
-
       var msg = req.body.message;
       var user = req.body.username;
       var room = req.body.roomname;
+
+      models.messages.post(msg);
+
+
       res.send(msg);
     } 
   },
@@ -45,24 +46,24 @@ module.exports = {
 
     },
     post: function (req, res) {
-      console.log('post for users');
-      models.users.post();
-
-
       var msg = req.body.message;
       var user = req.body.username;
       var room = req.body.roomname;
+
+      console.log('post for users with: ' + user);
+      models.users.post(user);
+
       res.send(user);
     }
   },
 
   options: {
-  	option: function(req, res) {
+    option: function(req, res) {
       console.log('options from controller');
 
 
-  		res.header(headers);
-  		res.send(200, null);
-  	}
+      res.header(headers);
+      res.send(200, null);
+    }
   }
 };
