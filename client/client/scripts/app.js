@@ -1,6 +1,6 @@
 var app = {
 
-  server: 'http://parse.sfm6.hackreactor.com/chatterbox/classes/messages',
+  server: 'http://127.0.0.1:3000/classes',
   username: 'anonymous',
   roomname: 'lobby',
   lastMessageId: 0,
@@ -17,7 +17,7 @@ var app = {
     app.$send.on('submit', app.handleSubmit);
     app.$roomSelect.on('change', app.handleRoomChange);
 
-    app.startSpinner();
+    // app.startSpinner();
     app.fetch(false);
 
     setInterval(function() {
@@ -29,7 +29,7 @@ var app = {
     app.startSpinner();
 
     $.ajax({
-      url: app.server,
+      url: app.server + '/messages',
       type: 'POST',
       data: message,
       success: function (data) {
@@ -44,9 +44,9 @@ var app = {
 
   fetch: function(animate) {
     $.ajax({
-      url: app.server,
+      url: app.server + '/messages',
       type: 'GET',
-      data: { order: '-createdAt' },
+      // data: { order: '-createdAt' },
       contentType: 'application/json',
       success: function(data) {
         if (!data.results || !data.results.length) { return; }
