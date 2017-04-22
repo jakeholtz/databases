@@ -18,11 +18,8 @@ module.exports = {
   messages: {
     get: function (req, res) {
       console.log('get for messages');
-      models.messages.get();
+      models.messages.get(res);
       
-
-      res.header(headers);
-      res.status(200);
     }, 
     post: function (req, res) {
       console.log('post for messages');
@@ -30,17 +27,17 @@ module.exports = {
       var user = req.body.username;
       var room = req.body.roomname;
 
-      models.messages.post(msg);
+      models.messages.post(msg, room, res);
 
 
-      res.send(msg);
+      // res.send(msg);
     } 
   },
 
   users: {
     get: function (req, res) {
       console.log('get for users');
-      models.users.get();
+      models.users.get(res);
 
 
 
@@ -51,17 +48,13 @@ module.exports = {
       var room = req.body.roomname;
 
       console.log('post for users with: ' + user);
-      models.users.post(user);
-
-      res.send(user);
+      models.users.post(user, res);
     }
   },
 
   options: {
     option: function(req, res) {
       console.log('options from controller');
-
-
       res.header(headers);
       res.send(200, null);
     }
